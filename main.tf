@@ -6,13 +6,13 @@ terraform {
       source = "hashicorp/aws"
       version = "~> 3.21"
     }
-
+/*
     demo_azure = {
         source = ""
         version = ""
     }
   }
-
+*/
   backend "s3" {
     bucket = "demo512"
     key = "terraform/state.tfstate"
