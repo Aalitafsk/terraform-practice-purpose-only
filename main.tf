@@ -11,8 +11,9 @@ terraform {
         source = ""
         version = ""
     }
-  }
 */
+  }
+
   backend "s3" {
     bucket = "demo512"
     key = "terraform/state.tfstate"
