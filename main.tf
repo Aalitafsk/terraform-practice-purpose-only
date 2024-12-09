@@ -2,7 +2,7 @@ terraform {
   required_version = "~> 1.8.4"
 
   required_providers {
-    demo_aws = {
+    demo-aws = {
       source = "hashicorp/aws"
       version = "~> 3.21"
     }
@@ -21,7 +21,7 @@ terraform {
   }
 }
 
-provider demo_aws {
+provider demo-aws {
   profile = "default"
   region = "us-east-1"
   //access_key = "xyz"
@@ -37,7 +37,7 @@ variable "vpc_cidr_block" {
 }
 
 resource "aws_vpc" "demo-vpc" {
-    provider = demo_aws.aws_lab
+    provider = demo-aws.aws_lab
     cidr_block = var.vpc_cidr_block
     tags = {
         Name: "demo-vpc-tag"
@@ -54,7 +54,7 @@ variable "avail_zone" {}
 variable "env_prefix" {}
 
 resource "aws_subnet" "demo-subnet" {
-    provider = demo_aws.aws_lab  
+    provider = demo-aws.aws_lab  
     vpc_id = aws_vpc.demo-vpc.id
     cidr_block = var.subnet_cidr_block[0]
     availability_zone = var.avail_zone
@@ -65,7 +65,7 @@ resource "aws_subnet" "demo-subnet" {
 }
 
 resource "aws_subnet" "demo-subnet-2" {
-    provider = demo_aws.aws_lab 
+    provider = demo-aws.aws_lab 
     vpc_id = aws_vpc.demo-vpc.id
     cidr_block = var.subnet_cidr_block[1]
     availability_zone = "us-east-1a"
