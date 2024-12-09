@@ -5,4 +5,4 @@ env_prefix = "dev"
 // myip = <server-ip>/32  --> this /32 means one single ip. as its cidr block so we have to use /32 
 myip = "<server-ip>/32"
 ec2-type = "t2.micro"
-public-key-location = "/user/home/.ssh/id_rsa.pub"
+// public-key-location = "~/.ssh/id_rsa.pub"

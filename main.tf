@@ -75,6 +75,7 @@ resource "aws_subnet" "demo-subnet-2" {
 }
 
 resource "aws_internet_gateway" "demo-igw" {
+    provider = demo-aws.aws_lab
     vpc_id = aws_vpc.demo-vpc.id
 }
 
@@ -146,15 +147,15 @@ data "aws_ami" "latest-amazon-linux-image"{
 output "aws_ami_id" {
   value = data.aws_ami.latest-amazon-linux-image.id
 }
-
+/*
 variable "public-key-location" {}
 
 resource "aws_key_pair" "demo-key" {
-    key_name = demo-key
+    key_name = same
     # public_key = "${file(var.public-key-location)}"
     public_key = file(var.public-key-location)
 }
-
+*/
 variable "ec2-type" {}
 
 resource "aws_instance" "demo-ec2" {
@@ -166,8 +167,8 @@ resource "aws_instance" "demo-ec2" {
     availability_zone = "us-east-1a"
 
     associate_public_ip_address = true
-    key_name = aws_key_pair.demo-key.key_name
-    # key_name = "same" # same.pem
+    # key_name = aws_key_pair.demo-key.key_name
+    key_name = "same1" # same.pem
 
     tags = {
         Name = "dev-server-ec2"
@@ -175,7 +176,7 @@ resource "aws_instance" "demo-ec2" {
 }
 
 
-/*
+
 # this is to create the new key pair. this also delete the key if you terrafrom destroy command 
 # ------------------------------
 resource "aws_key_pair" "TF_key" {
@@ -196,7 +197,7 @@ resource "local_file" "TF_key" {
   filename = "tfkey"
 }
 # ------------------------------
-*/
+
 
 output "ec2_public_ip"  {
     value = aws_instance.demo-ec2.public_ip 
