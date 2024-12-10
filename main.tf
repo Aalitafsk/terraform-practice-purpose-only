@@ -154,6 +154,7 @@ variable "public-key-location" {}
 to create the public key in the local m/c 
 this is stored in the ~/.ssh/<key-name>
 ssh-keygen
+# where to store key: /home/ec2-user/.ssh/test
 cat ~/.ssh/<key-name>
 # paste this whole string in the public_key = "whole-string"
 but we do not want to push this key into the github which is accessible to all users 
@@ -161,10 +162,12 @@ but we do not want to push this key into the github which is accessible to all u
 After instance launched ssh to the ec2 instance 
 to do this run the following command into the 
 ssh ec2-user@<public-ip> -i <private-key-name with location/path>
+ssh ec2-user@<public-ip> -i /home/ec2-user/.ssh/test
 */
 
 resource "aws_key_pair" "demo-key" {
-    key_name = same
+    # key_name = same
+    key_name = "server-key"
     # public_key = "${file(var.public-key-location)}"
     public_key = file(var.public-key-location)
 }
