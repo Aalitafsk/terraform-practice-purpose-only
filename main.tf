@@ -168,7 +168,7 @@ resource "aws_instance" "demo-ec2" {
 
     associate_public_ip_address = true
     # key_name = aws_key_pair.demo-key.key_name
-    key_name = "same1" # same.pem
+    key_name = "same" #"deployer-key" # same.pem
 
     tags = {
         Name = "dev-server-ec2"
@@ -176,7 +176,7 @@ resource "aws_instance" "demo-ec2" {
 }
 
 
-
+/*
 # this is to create the new key pair. this also delete the key if you terrafrom destroy command 
 # ------------------------------
 resource "aws_key_pair" "TF_key" {
@@ -197,7 +197,7 @@ resource "local_file" "TF_key" {
   filename = "tfkey"
 }
 # ------------------------------
-
+*/
 
 output "ec2_public_ip"  {
     value = aws_instance.demo-ec2.public_ip 
