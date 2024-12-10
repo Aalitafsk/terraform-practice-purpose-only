@@ -147,15 +147,29 @@ data "aws_ami" "latest-amazon-linux-image"{
 output "aws_ami_id" {
   value = data.aws_ami.latest-amazon-linux-image.id
 }
-/*
+
 variable "public-key-location" {}
+
+/*
+to create the public key in the local m/c 
+this is stored in the ~/.ssh/<key-name>
+ssh-keygen
+cat ~/.ssh/<key-name>
+# paste this whole string in the public_key = "whole-string"
+but we do not want to push this key into the github which is accessible to all users 
+# so we refence the file location 
+After instance launched ssh to the ec2 instance 
+to do this run the following command into the 
+ssh ec2-user@<public-ip> -i <private-key-name with location/path>
+*/
 
 resource "aws_key_pair" "demo-key" {
     key_name = same
     # public_key = "${file(var.public-key-location)}"
     public_key = file(var.public-key-location)
 }
-*/
+
+
 variable "ec2-type" {}
 
 resource "aws_instance" "demo-ec2" {
@@ -167,8 +181,8 @@ resource "aws_instance" "demo-ec2" {
     availability_zone = "us-east-1a"
 
     associate_public_ip_address = true
-    # key_name = aws_key_pair.demo-key.key_name
-    key_name = "same" #"deployer-key" # same.pem
+    key_name = aws_key_pair.demo-key.key_name
+    # key_name = "deployer-key" # "same" # use key name directly here 
 
     tags = {
         Name = "dev-server-ec2"
