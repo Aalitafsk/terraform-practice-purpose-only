@@ -193,6 +193,8 @@ resource "aws_instance" "demo-ec2" {
 
     # user_data = file("entry-script.sh")
     user_data = file("entry-script.sh")
+    # once the terraform configures the infrastructure, then terraform will not wait for the instance to come up to run this script.
+    # terraform will handover the this script to the cloud provider here its aws-cloud then it aws responsibility  to execute this after the instance will launch. 
 }
 
 
