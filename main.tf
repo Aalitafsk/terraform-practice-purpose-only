@@ -190,6 +190,9 @@ resource "aws_instance" "demo-ec2" {
     tags = {
         Name = "dev-server-ec2"
     }
+
+    # user_data = file("entry-script.sh")
+    user_data = file("entry-script.sh")
 }
 
 
